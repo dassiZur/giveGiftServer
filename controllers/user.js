@@ -16,7 +16,7 @@ const Gifts = require("../models/gift");
      let user = await User.findOne({ password: userBody.password  });
      
      if (user) {
-         return res.status(400).send('משתמש זה כבר קיים!');
+         return res.status(400).json('משתמש זה כבר קיים!');
      } 
      else {
 
@@ -24,13 +24,14 @@ const Gifts = require("../models/gift");
          try {
         let newUser = new User(userBody);
         console.log(newUser)
+        debugger
          await newUser.save();
          
          res.send(newUser);
         }
         catch (err) {
           
-                  return res.status(400).send(err.message)
+                  return res.status(400).json(err.message)
               }
      }
   }
@@ -86,7 +87,7 @@ const getLogin = async (req, res) => {
     console.log(req.body)
     let { username, password} = req.body;
 
-    let user = await User.find({password:password,username:username});
+    let user = await User.findOne({password:password,username:username});
     if (!user)
         return res.status(404).send("מצטערים לא נמצאה משתמש עם המזהה שהתקבל");
     return res.send(user);

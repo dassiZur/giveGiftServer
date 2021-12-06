@@ -17,6 +17,16 @@ const businessOwnerSchema = new mongoose.Schema({
         type: String,
         //required: true
     },
+
+    //===כתובת
+    // address: {
+    //     type: String,
+    // },
+    area: {
+        type: String,
+        enum : ['צפון','ירושלים','דרום','מרכז','חיפה','תל אביב'],
+        default: 'מרכז'
+    },
     //דואר אלקטרוני
     meil: {
         type: String,
@@ -40,7 +50,9 @@ const businessOwnerSchema = new mongoose.Schema({
         countShow: Number,
         //required: true
     }],
-
+    logo: {
+        type: String,
+    },
     // רשימת קטגוריה
     categories: [{
         type: mongoose.Schema.Types.ObjectId,

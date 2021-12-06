@@ -3,7 +3,9 @@ const mongoose = require("mongoose");
 
 //הוספת מתנה  חדשה  
 const post = async (req, res) => {
+    console.log("------------gift------from-------body---------------------");
     let gift = req.body;
+    console.log(gift);
     let newGift = new Gift(gift);
     if (!gift)
         return res.status(404).send(" מצטערים אתם צריכים להכניס שם משתמש וסיסמה ");
@@ -51,8 +53,14 @@ let put = async (req, res) => {
 
 //  קבלת כל המתנות  
 const get = async (req, res) => {
-    let gift = await Gift.find().populate("user", "category");
+    try{
+    let gift = await Gift.find();
+    // .populate("user", "category");
     return res.send(gift);
+    } catch (err) {
+        return res.status(400).send(err.message)
+    }
+
 }
 
 //   קבלת  מתנה עפ"י מזהה  
@@ -60,10 +68,15 @@ const getById = async (req, res) => {
     let { id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(id))
         return res.status(404).send("המזההה שהתקבל אינו תקין");
+        try{
     let gift = await Gift.findById(id);
     if (!gift)
         return res.status(404).send("מצטערים לא נמצאה בעל עסק עם המזהה שהתקבל");
     return res.send(gift);
+        }catch(err){
+return res.err(err)
+        }
+
 }
 const getByIdCategory = async (req, res) => {
 
