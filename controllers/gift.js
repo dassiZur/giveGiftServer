@@ -40,8 +40,8 @@ let put = async (req, res) => {
   gift.category = giftBody.category || gift.category;
   gift.gifPhoto = giftBody.gifPhoto || gift.gifPhoto;
   gift.ratedScore = giftBody.ratedScore || gift.ratedScore;
-  gift.fromAgeRange = giftBody.fromAgeRange || gift.fromAgeRange;
-  gift.toAgeRange = giftBody.toAgeRange || gift.toAgeRange;
+  gift.ageRange = giftBody.ageRange || gift.ageRange;
+  gift.character = giftBody.character || gift.character;
   gift.status = giftBody.status || gift.status;
   gift.remark = giftBody.remark || gift.remark;
   await gift.save();
